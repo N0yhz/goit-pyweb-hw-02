@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  assistant_bot:
+    build: .
+    container_name: personal_assistant
+    command: poetry run python main.py
+    volumes:
+      - .:/app
+    stdin_open: true
+    tty: true

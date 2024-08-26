@@ -1,7 +1,5 @@
 import pickle
-import redis
-from flask import Flask
-from app.action import (
+from action import (
     add_contact,
     change_contact,
     show_phone,
@@ -10,17 +8,13 @@ from app.action import (
     get_upcoming_birthdays,
     delete_contact
 )
-from app.Class import AddressBook, ConsoleView, Record
-from app.src.parse import parse_input
+from Class import AddressBook, ConsoleView, Record
+from parse import parse_input
 
-app = Flask(__name__)
-cache = redis.Redis(host='localhost', port=6379)
-@app.route('/')
 def save_data(book, filename = 'address_book.pkl'):
     with open(filename, 'wb') as f:
         pickle.dump(book, f)
 
-@app.route('/')
 def load_data(filename = 'address_book.pkl'):
     try:
         with open(filename, "rb") as f:
@@ -28,7 +22,6 @@ def load_data(filename = 'address_book.pkl'):
     except FileNotFoundError:
         return AddressBook()
 
-@app.route('/')
 def main():
     view = ConsoleView()
     book = load_data()

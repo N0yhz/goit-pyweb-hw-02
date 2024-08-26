@@ -2,14 +2,14 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-COPY pyproject.toml poetry.lock* ./
-
 COPY . .
-
-RUN pip install -r requirements.txt
 
 RUN pip install poetry
 
-RUN poetry install
+COPY pyproject.toml poetry.lock* /app/
 
-ENTRYPOINT ["poetry", "run", "python", "./main.py"]
+RUN poetry install --no-root
+
+COPY . /app
+
+CMD [ "poetry", "run", "python", "main.py" ]
