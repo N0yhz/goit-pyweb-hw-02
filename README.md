@@ -2,4 +2,4 @@
 
 1) Installed "Poetry"
 
-2) Docker interaction: получилось очень плохо. Выходит ошибка каждый раз
+2) Docker interaction: работает.
